@@ -18,7 +18,6 @@ public class PhysicsCharacterController : MonoBehaviour
 
 	void Start()
 	{
-		Cursor.lockState = CursorLockMode.Locked;
 		rb = GetComponent<Rigidbody>();
 	}
 
