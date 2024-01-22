@@ -4,30 +4,29 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// IntEvent - A simple observer pattern implementation using ScriptableObject.
+/// Event - A simple observer pattern implementation using ScriptableObject.
 /// </summary>
-[CreateAssetMenu(menuName = "Events/Int Event")]
-public class IntEvent : ScriptableObjectBase
+[CreateAssetMenu(menuName = "Events/Event")]
+public class Event : ScriptableObjectBase
 {
 	// Unity Actions allow you to dynamically call multiple functions.
 	// They are a simple way to implement delegates in scripting without
 	// needing to explicitly define them.
-	public UnityAction<int> onEventRaised;
+	public UnityAction onEventRaised;
 
 	/// <summary>
-	/// Raises the event with the specified integer value.
+	/// Raises the event with the specified boolean value.
 	/// </summary>
-	/// <param name="value">The integer value to pass to subscribers.</param>
-	public void RaiseEvent(int value)
+	public void RaiseEvent()
 	{
-		onEventRaised?.Invoke(value);
+		onEventRaised?.Invoke();
 	}
 
 	/// <summary>
 	/// Subscribes an object to the event.
 	/// </summary>
 	/// <param name="listener">The object that wants to subscribe.</param>
-	public void Subscribe(UnityAction<int> listener)
+	public void Subscribe(UnityAction listener)
 	{
 		onEventRaised += listener;
 	}
@@ -36,7 +35,7 @@ public class IntEvent : ScriptableObjectBase
 	/// Unsubscribes an object from the event.
 	/// </summary>
 	/// <param name="listener">The object that wants to unsubscribe.</param>
-	public void Unsubscribe(UnityAction<int> listener)
+	public void Unsubscribe(UnityAction listener)
 	{
 		onEventRaised -= listener;
 	}

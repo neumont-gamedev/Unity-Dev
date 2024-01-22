@@ -12,9 +12,11 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField] Slider healthUI;
 
 	[SerializeField] FloatVariable health;
+	[SerializeField] GameObject respawn;
+
 	[Header("Events")]
-	[SerializeField] IntEvent scoreEvent;
-	[SerializeField] VoidEvent gameStartEvent;
+	[SerializeField] Event gameStartEvent;
+	[SerializeField] GameObjectEvent respawnEvent;
 
 	public enum State
 	{
@@ -24,9 +26,9 @@ public class GameManager : Singleton<GameManager>
 		GAME_OVER
 	}
 
-	public State state = State.TITLE;
-	public float timer = 0;
-	public int lives = 0;
+	private State state = State.TITLE;
+	private float timer = 0;
+	private int lives = 0;
 
 	public int Lives { 
 		get { return lives; } 
@@ -46,20 +48,6 @@ public class GameManager : Singleton<GameManager>
 		}
 	}
 
-	private void OnEnable()
-	{
-		scoreEvent.Subscribe(OnAddPoints);
-	}
-
-	private void OnDisable()
-	{
-		scoreEvent.Unsubscribe(OnAddPoints);
-	}
-
-	void Start()
-	{
-	}
-
 	void Update()
 	{
 		switch (state)
@@ -73,9 +61,11 @@ public class GameManager : Singleton<GameManager>
 				titleUI.SetActive(false);
 				Timer = 60;
 				Lives = 3;
+				health.value = 100;
 				Cursor.lockState = CursorLockMode.Locked;
 				Cursor.visible = false;
 				gameStartEvent.RaiseEvent();
+				respawnEvent.RaiseEvent(respawn);
 				state = State.PLAY_GAME;
 				break;
 			case State.PLAY_GAME:
@@ -91,10 +81,15 @@ public class GameManager : Singleton<GameManager>
 				break;
 		}
 
-		healthUI.value = health.value / 100.0f;
+		healthUI.value = health / 100.0f;
 	}
 
 	public void OnStartGame()
+	{
+		state = State.START_GAME;
+	}
+
+	public void OnPlayerDead()
 	{
 		state = State.START_GAME;
 	}

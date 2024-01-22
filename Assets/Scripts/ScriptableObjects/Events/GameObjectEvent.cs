@@ -4,21 +4,21 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// IntEvent - A simple observer pattern implementation using ScriptableObject.
+/// GameObjectEvent - A simple observer pattern implementation using ScriptableObject.
 /// </summary>
-[CreateAssetMenu(menuName = "Events/Int Event")]
-public class IntEvent : ScriptableObjectBase
+[CreateAssetMenu(menuName = "Events/GameObject Event")]
+public class GameObjectEvent : ScriptableObjectBase
 {
 	// Unity Actions allow you to dynamically call multiple functions.
 	// They are a simple way to implement delegates in scripting without
 	// needing to explicitly define them.
-	public UnityAction<int> onEventRaised;
+	public UnityAction<GameObject> onEventRaised;
 
 	/// <summary>
-	/// Raises the event with the specified integer value.
+	/// Raises the event with the specified GameObject value.
 	/// </summary>
-	/// <param name="value">The integer value to pass to subscribers.</param>
-	public void RaiseEvent(int value)
+	/// <param name="value">The GameObject value to pass to subscribers.</param>
+	public void RaiseEvent(GameObject value)
 	{
 		onEventRaised?.Invoke(value);
 	}
@@ -27,7 +27,7 @@ public class IntEvent : ScriptableObjectBase
 	/// Subscribes an object to the event.
 	/// </summary>
 	/// <param name="listener">The object that wants to subscribe.</param>
-	public void Subscribe(UnityAction<int> listener)
+	public void Subscribe(UnityAction<GameObject> listener)
 	{
 		onEventRaised += listener;
 	}
@@ -36,7 +36,7 @@ public class IntEvent : ScriptableObjectBase
 	/// Unsubscribes an object from the event.
 	/// </summary>
 	/// <param name="listener">The object that wants to unsubscribe.</param>
-	public void Unsubscribe(UnityAction<int> listener)
+	public void Unsubscribe(UnityAction<GameObject> listener)
 	{
 		onEventRaised -= listener;
 	}

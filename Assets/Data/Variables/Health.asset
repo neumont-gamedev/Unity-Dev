@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66022054c8e77f24f8aee619a7a180d8, type: 3}
-  m_Name: ScoreEvent
+  m_Script: {fileID: 11500000, guid: 632cc60166b68364dafc667d5ce64b8e, type: 3}
+  m_Name: Health
   m_EditorClassIdentifier: 
-  description: Event when the score is updated.
+  initialValue: 100
