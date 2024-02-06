@@ -104,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3044251035913753644}
   - component: {fileID: 1392335443237037585}
+  - component: {fileID: 7816599419469253845}
   - component: {fileID: 4533540639305911476}
   - component: {fileID: 1403056744351998012}
   - component: {fileID: 3652136726068838413}
@@ -144,6 +145,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoData: {fileID: 11400000, guid: f3225a4e3d298ad46a08c11501ddf430, type: 2}
+  action: {fileID: 7816599419469253845}
+--- !u!114 &7816599419469253845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987411767316291280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a63a16a33b7f8947860dafe25ea8299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: 
 --- !u!82 &4533540639305911476
 AudioSource:
   m_ObjectHideFlags: 0
