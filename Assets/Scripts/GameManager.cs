@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField] Slider healthUI;
 
 	[SerializeField] FloatVariable health;
+	[SerializeField] IntVariable score;
 	[SerializeField] GameObject respawn;
 
 	[Header("Events")]

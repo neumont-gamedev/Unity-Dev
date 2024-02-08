@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShip : Interactable
+public class PlayerShip : MonoBehaviour, IDamagable
 {
-	[SerializeField] private Action action;
+	[SerializeField] private IntEvent scoreEvent;
 	[SerializeField] private Inventory inventory;
+	[SerializeField] private IntVariable score;
+	[SerializeField] private FloatVariable health;
 
-	public float health = 100;
-
+	[SerializeField] private GameObject hitPrefab;
+	[SerializeField] private GameObject destroyPrefab;
 
 	private void Start()
 	{
-		if (action != null)
-		{
-			action.onEnter += OnInteractStart;
-			action.onStay += OnInteractActive;
-		}
+		scoreEvent.Subscribe(AddPoints);
+		health.value = 100;
 	}
 
 	void Update()
@@ -31,18 +30,29 @@ public class PlayerShip : Interactable
 		}
 	}
 
-	public override void OnInteractActive(GameObject gameObject)
+	public void AddPoints(int points)
 	{
-		//
+		score.value += points;
+		Debug.Log(score.value);
 	}
 
-	public override void OnInteractEnd(GameObject gameObject)
+	public void ApplyDamage(float damage)
 	{
-		//
-	}
-
-	public override void OnInteractStart(GameObject gameObject)
-	{
-		//
+		health.value -= damage;
+		if (health <= 0)
+		{
+			if (destroyPrefab != null)
+			{
+				Instantiate(destroyPrefab, gameObject.transform.position, Quaternion.identity);
+			}
+			Destroy(gameObject);
+		}
+		else
+		{
+			if (hitPrefab != null)
+			{
+				Instantiate(hitPrefab, gameObject.transform.position, Quaternion.identity);
+			}
+		}
 	}
 }
