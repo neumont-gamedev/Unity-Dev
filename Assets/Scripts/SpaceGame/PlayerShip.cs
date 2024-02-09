@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerShip : MonoBehaviour, IDamagable
 {
+	[SerializeField] private PathFollower pathFollower;
 	[SerializeField] private IntEvent scoreEvent;
 	[SerializeField] private Inventory inventory;
 	[SerializeField] private IntVariable score;
@@ -28,6 +29,8 @@ public class PlayerShip : MonoBehaviour, IDamagable
 		{
 			inventory.StopUse();
 		}
+
+		pathFollower.speed = (Input.GetKey(KeyCode.Space)) ? 2 : 1;
 	}
 
 	public void AddPoints(int points)
@@ -54,5 +57,11 @@ public class PlayerShip : MonoBehaviour, IDamagable
 				Instantiate(hitPrefab, gameObject.transform.position, Quaternion.identity);
 			}
 		}
+	}
+
+	public void ApplyHealth(float health)
+	{
+		this.health.value += health;
+		this.health.value = Mathf.Min(this.health, 100);
 	}
 }
